@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4all-Downloader - Universal Video & Audio Downloader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDVMMzAgMTVIMjVWMjVIMzVWMzBIMjVWMzVIMTVWMzBINVYyNUgxNVYxNUgxMFY1SDIwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="4all-downloader logo">
+                <span>4all-Downloader</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#documentation">Documentation</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>4all-Downloader</h1>
+                <p>The ultimate universal video and audio downloader for all your favorite content</p>
+                <a href="#download" class="cta-button">Download Now</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Built-in Web Browser</h3>
+                        <p>Full-featured browser with JavaScript injection support for content detection, analysis, and ad-blocking capabilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Lossless Conversion</h3>
+                        <p>Professional-grade converter supporting MP4, MP3, MKV, AVI, WAV with quality selection and batch processing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Download Intelligence</h3>
+                        <p>Analyzes video formats (AVC, Opus) and automatically adds audio to video-only formats with smart detection.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>Multiple Download Engines</h3>
+                        <p>Support for yt-dlp, aria2c, curl, mix2 engines with custom engine integration and direct command access.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Advanced Network Config</h3>
+                        <p>Full proxy support (SOCKS5/HTTP), custom user agents, browser cookie integration, and multi-threading.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💻</div>
+                        <h3>Direct yt-dlp Commands</h3>
+                        <p>Command panel for direct yt-dlp command execution, giving power users full control over downloads.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Key Features -->
+        <section class="key-features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <div class="key-features-list">
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">🌍</div>
+                        <span>Multilingual Support (10+ Languages)</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">📋</div>
+                        <span>Download History Management</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">📤</div>
+                        <span>Export Downloads & Settings</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">📁</div>
+                        <span>Organized Sections (Home/Browser/Downloads)</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">🎨</div>
+                        <span>UI Customization (Themes & Colors)</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">📦</div>
+                        <span>Comprehensive File Support</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">🔒</div>
+                        <span>Privacy Protection (No Tracking)</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">🚫</div>
+                        <span>Ad-Free & Transparent Pricing</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">📊</div>
+                        <span>Download Filtering & Management</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">🔄</div>
+                        <span>Real-time Updates & Support</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">📸</div>
+                        <span>Thumbnail Previews with Metadata</span>
+                    </div>
+                    <div class="key-feature-item">
+                        <div class="key-feature-icon">🗂️</div>
+                        <span>Torrent & Document Downloads</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download">
+            <div class="container">
+                <h2 class="section-title">Download 4all-Downloader</h2>
+                <div class="download-cards">
+                    <div class="download-card windows">
+                        <div class="download-card-image">
+                            <img src=".\images\windows-logo.png" alt="Windows Logo">
+                        </div>
+                        <div class="download-card-content">
+                            <h3>Windows</h3>
+                            <p>Compatible with Windows 10/11 (64-bit)</p>
+                            <p><strong>Version:</strong> 2.1.0 | <strong>Size:</strong> 45 MB</p>
+                            <button class="download-button">Download for Windows</button>
+                        </div>
+                    </div>
+                    <div class="download-card mac">
+                        <div class="download-card-image">
+                            <img src=".\images\macos-logo.png" alt="macOS Logo">
+                        </div>
+                        <div class="download-card-content">
+                            <h3>macOS</h3>
+                            <p>Compatible with macOS 10.15+ (Intel & Apple Silicon)</p>
+                            <p><strong>Version:</strong> 2.1.0 | <strong>Size:</strong> 52 MB</p>
+                            <button class="download-button">Download for macOS</button>
+                        </div>
+                    </div>
+                    <div class="download-card linux">
+                        <div class="download-card-image">
+                            <img src=".\images\linux-logo.png" alt="Linux Logo">
+                        </div>
+                        <div class="download-card-content">
+                            <h3>Linux</h3>
+                            <p>Compatible with Ubuntu, Fedora, Debian, and more</p>
+                            <p><strong>Version:</strong> 2.1.0 | <strong>Size:</strong> 48 MB</p>
+                            <button class="download-button">Download for Linux</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation -->
+        <section id="documentation" class="documentation">
+            <div class="container">
+                <h2 class="section-title">Documentation</h2>
+                <div class="doc-grid">
+                    <div class="doc-card">
+                        <h3>📚 User Guide</h3>
+                        <p>Complete step-by-step guide covering installation, interface navigation, and basic downloading operations with screenshots.</p>
+                        <a href="#user-guide" class="doc-link">Read User Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>🌐 Web Browser Integration</h3>
+                        <p>Learn how to use the built-in browser, JavaScript injection, content detection, and advanced browsing features.</p>
+                        <a href="#browser-guide" class="doc-link">Browser Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>🔄 Format Conversion</h3>
+                        <p>Master the lossless converter with detailed guides on format selection, quality settings, and batch processing.</p>
+                        <a href="#conversion-guide" class="doc-link">Conversion Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>💻 yt-dlp Commands</h3>
+                        <p>Complete reference for direct yt-dlp command usage, custom parameters, and advanced download scenarios.</p>
+                        <a href="#ytdlp-commands" class="doc-link">Command Reference →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>⚙️ Advanced Configuration</h3>
+                        <p>Network settings, proxy configuration, download engines, custom user agents, and performance optimization.</p>
+                        <a href="#advanced-config" class="doc-link">Configuration Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>🌍 Multilingual Setup</h3>
+                        <p>Language switching, interface customization, and region-specific settings for international users.</p>
+                        <a href="#multilingual-guide" class="doc-link">Language Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>📊 Download Management</h3>
+                        <p>History tracking, export functionality, filtering downloads, and organizing your media collection.</p>
+                        <a href="#download-management" class="doc-link">Management Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>🐛 Troubleshooting</h3>
+                        <p>Common issues, error solutions, performance troubleshooting, and compatibility fixes for all platforms.</p>
+                        <a href="#troubleshooting" class="doc-link">Get Support →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>🔧 Custom Engines</h3>
+                        <p>How to integrate custom download engines, format mapping, and extending 4all-Downloader functionality.</p>
+                        <a href="#custom-engines" class="doc-link">Engine Guide →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>📖 Full Documentation</h3>
+                        <p>Complete comprehensive documentation covering all features, advanced usage, and developer information.</p>
+                        <a href=".\full-documentation.html" class="doc-link">View Complete Docs →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>🎯 Quick Start</h3>
+                        <p>Get up and running in 5 minutes with essential features, basic downloads, and initial setup guide.</p>
+                        <a href="#quick-start" class="doc-link">Quick Start →</a>
+                    </div>
+                    <div class="doc-card">
+                        <h3>💻 GitHub Repository</h3>
+                        <p>Access source code, report issues, contribute to development, and stay updated with latest releases.</p>
+                        <a href="https://github.com/1winner137/4all-downloader" class="doc-link">View on GitHub →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is 4all-Downloader free to use?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, 4all-Downloader is completely free with no hidden payments or subscription fees. It's also ad-free and provides transparent pricing with active user support.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What languages does 4all-Downloader support?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We support 10+ languages including English, French, Japanese, Korean, German, Spanish, Hindi, Chinese, and 2 additional languages. Note that Arabic is not currently supported.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I use my own download engines?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Besides built-in engines (yt-dlp, aria2c, curl, mix2), you can integrate custom engines by providing format mapping. Check our documentation for detailed setup instructions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Does it have a built-in web browser?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! 4all-Downloader includes a full-featured web browser with JavaScript injection support for content detection, analysis, ad-blocking, and direct downloading from any website.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I convert files without quality loss?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Our professional-grade lossless converter supports MP4, MP3, MKV, AVI, WAV, and many other formats with quality selection (high/medium/low) and batch processing capabilities.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Does it remember my download history?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, 4all-Downloader tracks your download history for easy reference and re-downloading. You can also export your download lists, history, and settings for backup or sharing across devices.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I use direct yt-dlp commands?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We provide a command panel where you can paste and execute direct yt-dlp commands, giving power users complete control over their downloads with custom parameters.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What about privacy and data protection?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Privacy is protected with no data retention policy. 4all-Downloader doesn't remember or track your browsing activity, ensuring your privacy while providing full functionality.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I download torrents and other file types?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Beyond video/audio, 4all-Downloader supports torrents, documents, images, ZIP files, ISO files, and other standard file types for comprehensive downloading needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Does it automatically add audio to video files?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our intelligent system analyzes video formats (AVC, Opus, etc.) and automatically adds audio tracks to video-only formats. You can also choose to download without audio if preferred.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I use proxy servers and custom network settings?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! 4all-Downloader supports both SOCKS5 and HTTP proxies, custom user agents, browser cookie integration, and configurable download threads for optimal performance.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is it legal to download videos?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>It depends on the content and your local laws. Please ensure you have permission to download content and comply with copyright laws and platform terms of service.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <!-- About -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About 4all-Downloader</h2>
+                <div class="about-content">
+                    <p style="text-align: justify; margin: 0 auto; max-width: 900px;">
+                        4all-Downloader is a comprehensive multimedia management solution that goes beyond simple downloading. With its built-in web browser, advanced JavaScript injection capabilities, and intelligent format detection, it's designed for users who demand both simplicity and professional-grade functionality.
+                    </p>
+                    <br>
+                    <p style="text-align: justify; margin: 0 auto; max-width: 900px;">
+                        What sets 4all-Downloader apart is its unique combination of features: lossless format conversion with batch processing, multilingual support across 10+ languages, and flexible download engines including yt-dlp, aria2c, and custom engine integration. The application automatically analyzes video formats and intelligently adds audio tracks where needed, while maintaining complete user privacy with no data retention.
+                    </p>
+                    <br>
+                    <p style="text-align: justify; margin: 0 auto; max-width: 900px;">
+                        From casual users who appreciate the clean interface with dark/light themes and customizable accent colors, to power users who need direct yt-dlp command access and advanced network configuration with proxy support — 4all-Downloader adapts to your workflow. With comprehensive file support beyond video and audio (including torrents, documents, and images), organized download history management, and export functionality, it's a complete media management ecosystem in one application.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="miscellenous.html#privacy-policy">Privacy Policy</a>
+                    <a href="miscellenous.html#terms-of-use">Terms of Use</a>
+                    <a href="https://github.com/1winner137/4all-downloader/issues">Report a Bug</a>
+                    <a href="miscellenous.html#community">Community</a>
+                    <a href="miscellenous.html#contributors">Contributors</a>
+                </div>
+                <p class="copyright">&copy; 2025 4all-Downloader. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
