@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4All-Downloader Documentation</title>
+    
+    <!-- Inherited CSS file -->
+    <link rel="stylesheet" href="./style.css?v=1.0.2">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Additional Documentation Styles -->
+    <style>
+        .doc-sidebar {
+            position: fixed;
+            left: 0;
+            top: 70px;
+            width: 300px;
+            height: calc(100vh - 70px);
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .doc-content {
+            margin-left: 300px;
+            padding: 2rem;
+            max-width: 1000px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .doc-content.expanded {
+            margin-left: 0;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 80px;
+            left: 10px;
+            z-index: 101;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav {
+            padding: 1rem;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section h3 {
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+        }
+
+        .doc-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .doc-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .doc-section h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .doc-section h4 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--card-bg);
+            border-radius: 0 5px 5px 0;
+        }
+
+        .code-block {
+            background: var(--code-bg, #2d3748);
+            color: var(--code-text, #e2e8f0);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #6ae639, #5feb5f);
+            border-left: 4px solid #02e23a;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #6da9f7, #1970e2);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card-doc {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card-doc:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon-doc {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .home-preview-image {
+            width: 90%; /* or 100% if you want full container width */
+            max-width: 900px; /* increased from 600px for bigger display */
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto; /* auto for horizontal centering */
+            display: block;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* slightly stronger shadow */
+        }
+
+
+        @media (max-width: 768px) {
+            .doc-sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+            
+            .doc-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .sidebar-toggle {
+                display: block;
+            }
+        }
+
+        .toc {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.2rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-download brand-icon"></i>
+                <span class="brand-text">4All-Downloader Docs</span>
+            </div>
+            <div class="nav-menu">
+                <a href="./" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Toggle -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Documentation Sidebar -->
+    <aside class="doc-sidebar" id="docSidebar">
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3>Getting Started</h3>
+                <a href="#overview" class="nav-link">Overview</a>
+                <a href="#installation" class="nav-link">Installation</a>
+                <a href="#quick-start" class="nav-link">Quick Start</a>
+            </div>
+            <div class="nav-section">
+                <h3>Core Features</h3>
+                <a href="#home-tab" class="nav-link">Home Tab</a>
+                <a href="#browser-tab" class="nav-link">Web Browser</a>
+                <a href="#downloads-tab" class="nav-link">Downloads</a>
+                <a href="#converter" class="nav-link">Format Converter</a>
+                <a href="#professional-tab" class="nav-link">Professional Mode</a>
+            </div>
+            <div class="nav-section">
+                <h3>Advanced</h3>
+                <a href="#customization" class="nav-link">Customization</a>
+                <a href="#network-settings" class="nav-link">Network Settings</a>
+                <a href="#download-engines" class="nav-link">Download Engines</a>
+                <a href="#command-panel" class="nav-link">Command Panel</a>
+            </div>
+            <div class="nav-section">
+                <h3>Reference</h3>
+                <a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#privacy" class="nav-link">Privacy</a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Documentation Content -->
+    <main class="doc-content" id="docContent">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3><i class="fas fa-list"></i> Table of Contents</h3>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#installation">Installation & Setup</a></li>
+                <li><a href="#home-tab">Home Tab Features</a></li>
+                <li><a href="#browser-tab">Web Browser Integration</a></li>
+                <li><a href="#downloads-tab">Download Management</a></li>
+                <li><a href="#converter">Format Converter</a></li>
+                <li><a href="#professional-tab">Professional Mode</a></li>
+                <li><a href="#customization">Appearance & Customization</a></li>
+                <li><a href="#network-settings">Network Configuration</a></li>
+                <li><a href="#download-engines">Download Engines</a></li>
+                <li><a href="#privacy">Privacy & Security</a></li>
+            </ul>
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview" class="doc-section">
+            <h2><i class="fas fa-info-circle"></i> Overview</h2>
+            <p style="text-align: justify;">4All-Downloader is the world's first truly limitless download solution, designed to handle content from any platform with infinite customization capabilities. Whether you're downloading videos, audio, documents, or any other media files, our tool provides a seamless experience across all major websites and services.</p>
+            
+            <div class="info-box">
+                <strong>Key Philosophy:</strong> One application, unlimited possibilities - download what you need, when you need it, in the quality you want, with complete control over how it works.
+            </div>
+
+            <h3>What Makes 4All-Downloader Unique</h3>
+            <ul class="feature-list">
+                <li><strong>Infinite Customization:</strong> Customize the entire appearance, bring your own download engines, and execute direct commands</li>
+                <li><strong>Universal Compatibility:</strong> Works with any website or platform</li>
+                <li><strong>Privacy First:</strong> Zero data retention, no tracking, complete privacy protection</li>
+                <li><strong>Professional Grade:</strong> Advanced format analysis and intelligent downloading</li>
+                <li><strong>Free & Open:</strong> No ads, no hidden payments, completely transparent</li>
+            </ul>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="installation" class="doc-section">
+            <h2><i class="fas fa-download"></i> Installation & Setup</h2>
+            
+            <h3>System Requirements</h3>
+            <div class="feature-grid">
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fab fa-windows"></i></div>
+                    <h4>Windows</h4>
+                    <p>Windows 10/11 (64-bit)<br>2GB RAM minimum<br>0.4GB free disk space</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fab fa-apple"></i></div>
+                    <h4>macOS</h4>
+                    <p>macOS 10.15 or later<br>2GB RAM minimum<br>0.4GB free disk space</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fab fa-linux"></i></div>
+                    <h4>Linux</h4>
+                    <p>Ubuntu 18.04+, Debian 10+, Fedora 32+<br>2GB RAM minimum<br>0.4GB free disk space</p>
+                </div>
+            </div>
+
+            <h3>Quick Setup</h3>
+            <ol>
+                <li>Download the installer for your operating system</li>
+                <li>Run the installer with administrator privileges</li>
+                <li>Follow the installation wizard</li>
+                <li>Launch 4All-Downloader and complete the initial setup</li>
+            </ol>
+
+            <div class="warning-box">
+                <strong>Note:</strong> Some antivirus software may flag download tools. Add 4All-Downloader to your whitelist if needed.
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section id="quick-start" class="doc-section">
+            <h2><i class="fas fa-rocket"></i> Quick Start Guide</h2>
+            
+            <h3>Your First Download</h3>
+            <ol>
+                <li><strong>Open the Home Tab:</strong> This is your main interface for searching and downloading content</li>
+                <li><strong>Enter a URL or Keywords:</strong> Paste a direct link or search for content by keywords</li>
+                <li><strong>Select Content:</strong> Browse through the results with thumbnails, duration, and metadata</li>
+                <li><strong>Choose Format:</strong> Click the download button to see available formats and quality options</li>
+                <li><strong>Download:</strong> Select your preferred format and quality, then start the download</li>
+            </ol>
+
+            <div class="info-box">
+                <strong>Pro Tip:</strong> You can also use the Web Browser tab to navigate to any site and download content directly from the page.
+            </div>
+        </section>
+
+        <!-- Home Tab Section -->
+        <section id="home-tab" class="doc-section">
+            <h2><i class="fas fa-home"></i> Home Tab Features</h2>
+            
+            <h3>Search Capabilities</h3>
+            <p>The Home tab is your central hub for content discovery and downloading. It supports multiple input methods:</p>
+            
+            <ul class="feature-list">
+                <li><strong>Keyword Search:</strong> Search for content using descriptive keywords</li>
+                <li><strong>Direct URLs:</strong> Paste direct links to videos, playlists, or channels</li>
+                <li><strong>Playlist Support:</strong> Download entire playlists with batch processing</li>
+                <li><strong>Channel URLs:</strong> Access all content from a specific channel</li>
+                <img src="./images/playlist.png" alt="Home tab preview" class="home-preview-image">
+            </ul>
+
+            <h3>Content Preview</h3>
+            <p>Each search result displays comprehensive information:</p>
+            <ul class="feature-list">
+                <li><strong>Thumbnail Preview:</strong> Visual preview of the content</li>
+                <li><strong>Duration:</strong> Length of video/audio content</li>
+                <li><strong>Channel Information:</strong> Creator or source details</li>
+                <li><strong>Title & Description:</strong> Full content metadata</li>
+                <li><strong>View Count:</strong> Popularity metrics</li>
+            </ul>
+
+            <h3>Action Buttons</h3>
+            <p>Every piece of content comes with three action options:</p>
+            <ul class="feature-list">
+                <li><strong>Download Button:</strong> Access format selection and download options</li>
+                <li><strong>Share Button:</strong> Generate shareable links</li>
+                <li><strong>Play Button:</strong> Preview content before downloading</li>
+            </ul>
+            <img src="./images/home.png" alt="Home tab preview" class="home-preview-image">
+        </section>
+
+        <!-- Browser Tab Section -->
+        <section id="browser-tab" class="doc-section">
+            <h2><i class="fas fa-globe"></i> Web Browser Integration</h2>
+            
+            <div class="info-box">
+                <strong>Note:</strong> Due to Flet framework limitations on Windows platform, the built-in web browser feature requires manual show/hide toggling using the eye button or menu navigation.
+            </div>
+            
+            <h3>Built-in Browser Features</h3>
+            <p>The Web Browser tab provides a full browsing experience with download capabilities:</p>
+            
+            <ul class="feature-list">
+                <li><strong>Direct Website Access:</strong> Navigate to any website directly</li>
+                <li><strong>Content Detection:</strong> Automatically detect downloadable content on pages</li>
+                <li><strong>JavaScript Injection:</strong> Advanced scripting for content analysis and extraction</li>
+                <li><strong>Ad-Blocking:</strong> Built-in ad blocker for cleaner browsing</li>
+                <li><strong>Download Integration:</strong> One-click downloading from any compatible page</li>
+                <img src="./images/browseryou.png" alt="web browser tab preview" class="home-preview-image">
+            </ul>
+        
+            <h3>Browser Controls</h3>
+            <p>The browser interface includes several control buttons:</p>
+            <ul class="feature-list">
+                <li><strong>Eye Button:</strong> Show/hide browser (required due to platform limitations)</li>
+                <li><strong>Refresh Button (↻):</strong> Reload current page</li>
+                <li><strong>Go Button (→):</strong> Navigate to entered URL</li>
+                <li><strong>Download Button (⬇):</strong> Large red download button for detected content</li>
+                <li><strong>Close Button (✕):</strong> Close browser window</li>
+                <li><strong>JavaScript Inject (&lt;&gt;):</strong> One-time script injection</li>
+                <img src="./images/browser.png" alt="web browser tab preview" class="home-preview-image">
+            </ul>
+        
+            <h3>JavaScript Injection System</h3>
+            <p>Advanced users can create custom JavaScript files for enhanced functionality:</p>
+            
+            <h4>Setting Up JavaScript Files</h4>
+            <p>Navigate to <code>~\.yt-dlite\javascript\</code> directory and create files with these supported names:</p>
+            <ul class="feature-list">
+                <li><code>script.js</code> - General purpose scripting</li>
+                <li><code>video_monitor.js</code> - Video content monitoring</li>
+                <li><code>audio_extractor.js</code> - Audio extraction utilities</li>
+                <li><code>download_helper.js</code> - Download assistance scripts</li>
+                <li><code>page_analyzer.js</code> - Page structure analysis</li>
+                <li><code>ad_blocker.js</code> - Custom ad blocking rules</li>
+                <li><code>form_filler.js</code> - Automated form filling</li>
+            </ul>
+        
+            <h4>JavaScript Injection Modes</h4>
+            <ul class="feature-list">
+                <li><strong>Auto-Inject:</strong> Select from dropdown in browser section - automatically injects on new URLs and tab refreshes</li>
+                <li><strong>Manual Inject:</strong> Use "&lt;&gt;" button for one-time injection - does not persist on URL changes</li>
+            </ul>
+        
+            <div class="info-box">
+                <strong>Browser Visibility:</strong> To access JavaScript dropdown, first click the eye button to show browser. When menu is clicked, browser hides automatically - click eye button again or navigate to browser section via menu for automatic showing.
+                Sometimes browser(web view) might appear outside the app! just close it and try to click "Go" button again
+            </div>
+        
+            <h4>Use Cases for JavaScript Injection</h4>
+            <ul class="feature-list">
+                <li><strong>Content Analysis:</strong> Analyze page structure and detect media content</li>
+                <li><strong>Custom Detection:</strong> Create rules for specific website content patterns</li>
+                <li><strong>Automation:</strong> Automate repetitive browsing and download tasks</li>
+                <li><strong>Enhanced Compatibility:</strong> Work with complex or dynamically loaded content</li>
+                <li><strong>Data Extraction:</strong> Extract specific information from web pages</li>
+            </ul>
+        
+            <div class="code-block">
+        // Example: video_monitor.js - Monitor for video content
+        document.querySelectorAll('video').forEach(video => {
+            console.log('Found video:', video.src);
+            // Add download button or trigger download
+            video.addEventListener('loadeddata', function() {
+                console.log('Video loaded:', this.duration + ' seconds');
+            });
+        });
+        
+        // Example: page_analyzer.js - Analyze page structure
+        const mediaElements = {
+            videos: document.querySelectorAll('video').length,
+            audios: document.querySelectorAll('audio').length,
+            images: document.querySelectorAll('img').length
+        };
+        console.log('Media found:', mediaElements);
+            </div>
+        
+            <div class="warning-box">
+                <strong>Advanced Feature:</strong> JavaScript injection requires programming knowledge. Always respect website terms of service and use responsibly. Test scripts thoroughly before using auto-inject mode.
+                <br>
+                <strong>repair javascript: </strong>Incase user mess up with javascript he/she can click update button, when he/she is outside browser, and click update button! and tick "additional files" to get javascript files back,
+            </div>
+        </section>
+
+        <!-- Downloads Tab Section -->
+        <section id="downloads-tab" class="doc-section">
+            <h2><i class="fas fa-download"></i> Download Management</h2>
+
+            <div class="warning-box">
+                <strong>Note:</strong> Download tab is the one at higher risk to cause freezing on GUI - so avoid many download tasks, or just reduce total videos downloaded within the ~\Downloads\yt-dlite. -We are working on this mysery
+            </div>
+            <div class="warning-box">
+                <strong>Hint:</strong> Download tab! during download progress may download everything fine and show error after 100%! This is usually download complete just close and open broser again. and then delete the tasks - We are working on this also
+            </div>
+            <h3>Download Filters</h3>
+            <p>Organize your downloads with powerful filtering options:</p>
+            <ul class="feature-list">
+                <li><strong>Active Downloads:</strong> Currently downloading files</li>
+                <li><strong>Completed Downloads:</strong> Successfully finished downloads</li>
+                <li><strong>All Downloads:</strong> Complete download history</li>
+                <li><strong>Failed Downloads:</strong> Downloads that encountered errors</li>
+                <li><strong>Paused Downloads:</strong> Temporarily stopped downloads</li>
+                <img src="./images/download_tabd.png" alt="download tab preview" class="home-preview-image">
+            </ul>
+
+            <h3>Download Information</h3>
+            <p>Each download entry displays:</p>
+            <ul class="feature-list">
+                <li><strong>File Name & Type:</strong> Original name and format</li>
+                <li><strong>Progress Bar:</strong> Real-time download progress</li>
+                <li><strong>Speed & ETA:</strong> Current download speed and estimated completion time</li>
+                <li><strong>File Size:</strong> Total size and downloaded amount</li>
+                <li><strong>Source URL:</strong> Original download location</li>
+            </ul>
+
+            <h3>Supported File Types</h3>
+            <div class="feature-grid">
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fas fa-video"></i></div>
+                    <h4>Video Files</h4>
+                    <p>MP4, MKV, AVI, MOV, WMV, FLV, WebM</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fas fa-music"></i></div>
+                    <h4>Audio Files</h4>
+                    <p>MP3, WAV, FLAC, AAC, OGG, M4A</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fas fa-file"></i></div>
+                    <h4>Documents</h4>
+                    <p>PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fas fa-archive"></i></div>
+                    <h4>Archives</h4>
+                    <p>ZIP, RAR, 7Z, TAR, GZ, ISO</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fas fa-image"></i></div>
+                    <h4>Images</h4>
+                    <p>JPG, PNG, GIF, BMP, TIFF, WebP</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc"><i class="fas fa-magnet"></i></div>
+                    <h4>Torrents</h4>
+                    <p>Torrent files and magnet links</p>
+                </div>
+            </div>
+            <div class="warning-box">
+                <strong>Note:</strong> Other tab does not show download progress but it works fine, so do not worry -We are working on this issue
+            </div>
+            <img src="./images/other.png" alt="download tab preview" class="home-preview-image">
+        </section>
+
+        <!-- Converter Section -->
+        <section id="converter" class="doc-section">
+            <h2><i class="fas fa-exchange-alt"></i> Format Converter</h2>
+            
+            <h3>Lossless Conversion</h3>
+            <p>Convert between various formats without quality loss:</p>
+            <ul class="feature-list">
+                <li><strong>Video Conversion:</strong> MP4 ↔ MKV ↔ AVI ↔ MOV ↔ WebM</li>
+                <li><strong>Audio Conversion:</strong> MP3 ↔ WAV ↔ FLAC ↔ AAC ↔ OGG</li>
+                <li><strong>Image Conversion:</strong> JPG ↔ PNG ↔ WebP ↔ BMP : COMING SOON</li>
+                <li><strong>Document Conversion:</strong> Various document format conversions: COMING SOON</li>
+            </ul>
+
+            <h3>Quality Options</h3>
+            <ul class="feature-list">
+                <li><strong>High Quality:</strong> Maximum quality preservation (larger file size)</li>
+                <li><strong>Medium Quality:</strong> Balanced quality and file size</li>
+                <li><strong>Low Quality:</strong> Compressed for smaller file size</li>
+                <li><strong>Custom Settings:</strong> Advanced users can set specific parameters</li>
+            </ul>
+
+            <h3>Batch Conversion</h3>
+            <p>Convert multiple files simultaneously:</p>
+            <ul class="feature-list">
+                <li><strong>Queue Management:</strong> Add multiple files to conversion queue</li>
+                <li><strong>Progress Tracking:</strong> Monitor conversion progress for each file</li>
+                <li><strong>Output Organization:</strong> Automatically organize converted files</li>
+                <li><strong>Format Templates:</strong> Save conversion settings as templates</li>
+                <img src="./images/converter.png" alt="convert tab preview" class="home-preview-image">
+            </ul>
+        </section>
+        <!-- Professional Tab Section -->
+        <section id="professional-tab" class="doc-section">
+            <h2><i class="fas fa-cogs"></i> Professional Mode</h2>
+            
+            <h3>Advanced Format Analysis</h3>
+            <p>The Professional tab provides comprehensive media analysis and format selection capabilities:</p>
+            <ul class="feature-list">
+                <li><strong>URL Analysis:</strong> Paste any media URL and click "Analyze" for detailed inspection</li>
+                <li><strong>Complete Format Detection:</strong> Identifies all available video and audio formats</li>
+                <li><strong>Technical Specifications:</strong> Detailed codec information (AVC, VP9, AV1, Opus, AAC, etc.)</li>
+                <li><strong>Quality Assessment:</strong> Resolution, bitrate, and quality metrics for each format</li>
+            </ul>
+        
+            <h3>Media Information Display</h3>
+            <p>After analysis, view comprehensive media details:</p>
+            <ul class="feature-list">
+                <li><strong>Basic Information:</strong> Title, channel name, upload date, and description</li>
+                <li><strong>Statistics:</strong> View count, duration, and engagement metrics</li>
+                <li><strong>Thumbnail Preview:</strong> High-quality thumbnail display</li>
+                <li><strong>Channel Details:</strong> Creator information and verification status</li>
+            </ul>
+        
+            <h3>Format Categories</h3>
+            <p>Formats are intelligently categorized for easy selection:</p>
+            <ul class="feature-list">
+                <li><strong>Video Formats:</strong> Filtered list showing resolution, codec, and file size</li>
+                <li><strong>Audio Formats:</strong> Separate audio-only options with quality indicators</li>
+                <li><strong>Combined Formats:</strong> Video+audio formats when available</li>
+                <li><strong>Format Details:</strong> Codec type, bitrate, container format, and compatibility info</li>
+            </ul>
+        
+            <h3>Intelligent Audio Handling</h3>
+            <p>Smart audio management for video-only formats:</p>
+            <ul class="feature-list">
+                <li><strong>Audio Detection:</strong> Automatically detects when video formats lack audio</li>
+                <li><strong>User Choice:</strong> Option to download video-only or with best available audio</li>
+                <li><strong>Audio Matching:</strong> Intelligent audio track selection and synchronization</li>
+                <li><strong>Format Compatibility:</strong> Ensures audio and video codecs are compatible</li>
+            </ul>
+        
+            <h3>Professional Features</h3>
+            <ul class="feature-list">
+                <li><strong>Codec Analysis:</strong> Detailed information about AVC/H.264, VP9, AV1, HEVC codecs</li>
+                <li><strong>Container Support:</strong> MP4, WebM, MKV, and other container format details</li>
+                <li><strong>Quality Comparison:</strong> Side-by-side format comparison tools</li>
+                <li><strong>File Size Estimation:</strong> Accurate download size predictions</li>
+                <li><strong>Compatibility Warnings:</strong> Alerts for device/player compatibility issues</li>
+            </ul>
+        
+            <div class="info-box">
+                <strong>Professional Workflow:</strong> 
+                <ol style="margin: 10px 0; padding-left: 20px;">
+                    <li>Paste media URL in the input field</li>
+                    <li>Click "Analyze" to fetch all available formats</li>
+                    <li>Review detailed media information and statistics</li>
+                    <li>Select desired format from categorized lists</li>
+                    <li>Choose audio preferences for video-only formats</li>
+                    <li>Download with intelligent format processing</li>
+                </ol>
+            </div>
+            <img src="./images/proffesional.png" alt="professional tab preview" class="home-preview-image">        
+            <div class="warning-box">
+                <strong>Advanced Users:</strong> This tab provides technical details suitable for users who need specific codec information and format control. For simple downloads, use the Home tab instead.
+            </div>
+        </section>
+        <!-- Customization Section -->
+        <section id="customization" class="doc-section">
+            <h2><i class="fas fa-palette"></i> Appearance & Customization</h2>
+            
+            <h3>Theme Options</h3>
+            <ul class="feature-list">
+                <li><strong>Dark Theme:</strong> Easy on the eyes for low-light environments</li>
+                <li><strong>Light Theme:</strong> Clean, bright interface for daylight use</li>
+                <li><strong>Auto Theme:</strong> Automatically switch based on system settings</li>
+            </ul>
+
+            <h3>Accent Colors</h3>
+            <p>Personalize your interface with custom accent colors:</p>
+            <ul class="feature-list">
+                <li><strong>Predefined Colors:</strong> Choose from a palette of beautiful colors</li>
+                <li><strong>Custom Colors:</strong> Set any color using hex codes or color picker</li>
+                <li><strong>Color Themes:</strong> Save and switch between different color schemes</li>
+            </ul>
+
+            <h3>Multilingual Support</h3>
+            <p>4All-Downloader supports the following languages:</p>
+            <ul class="feature-list">
+                <li>🇺🇸 English</li>
+                <li>🇫🇷 French (Français)</li>
+                <li>🇯🇵 Japanese (日本語)</li>
+                <li>🇰🇷 Korean (한국어)</li>
+                <li>🇩🇪 German (Deutsch)</li>
+                <li>🇪🇸 Spanish (Español)</li>
+                <li>🇮🇳 Hindi (हिन्दी)</li>
+                <li>🇨🇳 Chinese (中文)</li>
+                <li>🇷🇺 Russian (Русский)</li>
+                <li>🇵🇹 Portuguese (Português)</li>
+            </ul>
+            <img src="./images/custom.png" alt="custom change language and accent color tab preview" class="home-preview-image">
+            <div class="info-box">
+                <strong>Note:</strong> Language can be changed in the main interface. The documentation inherits your selected theme but uses the English language as default - system theme and language - in upcoming version.
+            </div>
+        </section>
+
+        <!-- Network Settings Section -->
+        <section id="network-settings" class="doc-section">
+            <h2><i class="fas fa-network-wired"></i> Network Configuration</h2>
+            
+            <h3>Proxy Support</h3>
+            <p>Configure proxy settings for enhanced privacy and access:</p>
+            <ul class="feature-list">
+                <li><strong>SOCKS5 Proxy:</strong> Full protocol support with authentication</li>
+                <li><strong>HTTP Proxy:</strong> Standard HTTP proxy configuration</li>
+                <li><strong>Proxy Authentication:</strong> Username/password authentication support</li>
+                <li><strong>Proxy Testing:</strong> Built-in connectivity testing</li>
+            </ul>
+
+            <h3>User Agent Configuration</h3>
+            <ul class="feature-list">
+                <li><strong>Browser Emulation:</strong> Mimic different browsers and devices</li>
+                <li><strong>Custom User Agents:</strong> Set custom user agent strings</li>
+                <li><strong>Rotation Support:</strong> Automatically rotate user agents</li>
+            </ul>
+
+            <h3>Cookie Management</h3>
+            <ul class="feature-list">
+                <li><strong>Browser Cookie Import:</strong> Import cookies from Chrome, Firefox, Safari, Edge</li>
+                <li><strong>Manual Cookie Loading:</strong> Load cookie files directly</li>
+                <li><strong>Session Management:</strong> Maintain login sessions for protected content</li>
+            </ul>
+
+            <h3>Download Threading</h3>
+            <ul class="feature-list">
+                <li><strong>Maximum Threads:</strong> Set the maximum number of simultaneous downloads</li>
+                <li><strong>Per-File Threading:</strong> Configure threads per individual download</li>
+                <li><strong>Bandwidth Management:</strong> Control download speed and prioritization</li>
+            </ul>
+        </section>
+
+        <!-- Download Engines Section -->
+        <section id="download-engines" class="doc-section">
+            <h2><i class="fas fa-cog"></i> Download Engines</h2>
+            
+            <h3>Built-in Engines</h3>
+            <p>4All-Downloader comes with multiple download engines:</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc">🎥</div>
+                    <h4>yt-dlp</h4>
+                    <p>Primary engine for video platforms. Supports hundreds of sites with regular updates.</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc">⚡</div>
+                    <h4>aria2c</h4>
+                    <p>High-speed multi-threaded downloader. Excellent for large files and torrents.</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc">🌐</div>
+                    <h4>curl</h4>
+                    <p>Universal HTTP/HTTPS downloader. Reliable for standard web downloads.</p>
+                </div>
+                <div class="feature-card-doc">
+                    <div class="feature-icon-doc">🎵</div>
+                    <h4>mix2</h4>
+                    <p>Specialized engine for audio content and music platforms.</p>
+                </div>
+            </div>
+
+            <h3>Custom Engine Integration</h3>
+            <p>Advanced users can integrate their own download engines:</p>
+            
+            <div class="warning-box">
+                <strong>Advanced Feature:</strong> Custom engine integration requires technical knowledge and proper format mapping configuration.
+            </div>
+
+            <h4>Requirements for Custom Engines</h4>
+            <ul class="feature-list">
+                <li><strong>Executable File:</strong> Your custom downloader must be executable</li>
+                <li><strong>Command Line Interface:</strong> Must accept command-line arguments</li>
+                <li><strong>Format Mapping:</strong> Provide translation mapping for different formats</li>
+                <li><strong>Output Standards:</strong> Follow standard output formats for progress reporting</li>
+            </ul>
+
+            <h4>Format Mapping Configuration</h4>
+            <div class="code-block">
+{
+    "engine_name": "custom_downloader",
+    "executable_path": "/path/to/your/downloader",
+    "format_mapping": {
+        "mp4_720p": "--format=720p --output=mp4",
+        "mp3_320k": "--audio-only --bitrate=320k",
+        "best_quality": "--best-quality"
+    },
+    "progress_pattern": "Progress: (\\d+)%"
+}
+            </div>
+
+            <div class="info-box">
+                <strong>Documentation:</strong> Detailed custom engine integration guide is available in the advanced configuration section.
+            </div>
+        </section>
+
+        <!-- Command Panel Section -->
+        <section id="command-panel" class="doc-section">
+            <h2><i class="fas fa-terminal"></i> Command Panel</h2>
+            
+            <h3>Direct Command Execution</h3>
+            <p>Power users can execute direct commands for maximum control, is located in download tab:</p>
+            
+            <ul class="feature-list">
+                <li><strong>yt-dlp Commands:</strong> Execute any yt-dlp command directly</li>
+                <li><strong>aria2c Commands:</strong> Use aria2c with custom parameters</li>
+                <li><strong>Custom Engine Commands:</strong> Run commands for your custom engines</li>
+                <li><strong>Batch Commands:</strong> Execute multiple commands in sequence</li>
+            </ul>
+
+            <h3>Command Examples</h3>
+            <div class="code-block">
+# Download best quality video
+yt-dlp -f "best[height<=1080]" https://example.com/video
+
+# Download audio only in MP3 format
+yt-dlp -f "bestaudio" --extract-audio --audio-format mp3 URL
+
+# Download with custom output filename
+yt-dlp -o "%(title)s.%(ext)s" URL
+
+# Download playlist with numbering
+yt-dlp -o "%(playlist_index)s - %(title)s.%(ext)s" PLAYLIST_URL
+            </div>
+
+            <h3>Safety Features</h3>
+            <ul class="feature-list">
+                <li><strong>Command Validation:</strong> Basic syntax checking before execution</li>
+                <li><strong>Output Capture:</strong> All command output is captured and displayed</li>
+                <li><strong>Error Handling:</strong> Proper error reporting and handling</li>
+                <li><strong>History:</strong> Command history for repeated use</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>Warning:</strong> Direct command execution requires knowledge of the specific download engine syntax. Incorrect commands may cause errors or unexpected behavior.
+            </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section id="privacy" class="doc-section">
+            <h2><i class="fas fa-shield-alt"></i> Privacy & Security</h2>
+            
+            <h3>Zero Data Retention Policy</h3>
+            <p>4All-Downloader is designed with privacy as a core principle:</p>
+            <ul class="feature-list">
+                <li><strong>No Browsing History:</strong> No record of websites visited or searches performed</li>
+                <li><strong>No Download Tracking:</strong> Download history is stored locally only</li>
+                <li><strong>No User Analytics:</strong> No data collection or user behavior tracking</li>
+                <li><strong>No Cloud Storage:</strong> All data remains on your device</li>
+                <li><strong>No Account Required:</strong> Use the application without any registration</li>
+            </ul>
+
+            <h3>Security Features</h3>
+            <ul class="feature-list">
+                <li><strong>Local Processing:</strong> All operations performed locally on your device</li>
+                <li><strong>Secure Connections:</strong> HTTPS/SSL encryption for all network communications</li>
+                <li><strong>Malware Protection:</strong> Built-in scanning for downloaded files</li>
+                <li><strong>Sandbox Execution:</strong> Download engines run in isolated environments</li>
+            </ul>
+
+            <h3>Data Storage</h3>
+            <ul class="feature-list">
+                <li><strong>Local Configuration:</strong> Settings stored in local configuration files</li>
+                <li><strong>Temporary Files:</strong> Automatic cleanup of temporary download files</li>
+                <li><strong>User Control:</strong> Complete control over data location and retention</li>
+            </ul>
+        </section>
+
+        <!-- Troubleshooting Section -->
+        <section id="troubleshooting" class="doc-section">
+            <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+            
+            <h3>Common Issues</h3>
+            
+            <h4>Download Failures</h4>
+            <ul class="feature-list">
+                <li><strong>Network Issues:</strong> Check internet connection and proxy settings</li>
+                <li><strong>Blocked Content:</strong> Some content may be geo-restricted or require authentication</li>
+                <li><strong>Outdated Engine:</strong> Update yt-dlp or other engines to latest version</li>
+                <li><strong>Invalid URL:</strong> Verify the URL is correct and accessible</li>
+            </ul>
+
+            <h4>Performance Issues</h4>
+            <ul class="feature-list">
+                <li><strong>Slow Downloads:</strong> Reduce number of simultaneous downloads</li>
+                <li><strong>High CPU Usage:</strong> Lower video quality or conversion settings</li>
+                <li><strong>Memory Issues:</strong> Close unnecessary applications and reduce thread count</li>
+            </ul>
+
+            <h4>Format Issues</h4>
+            <ul class="feature-list">
+                <li><strong>Unsupported Format:</strong> Use the converter to change to supported format</li>
+                <li><strong>Missing Audio:</strong> Enable intelligent audio addition in settings</li>
+                <li><strong>Quality Issues:</strong> Check available formats and select appropriate quality</li>
+            </ul>
+
+            <h3>Getting Help</h3>
+            <ul class="feature-list">
+                <li><strong>Built-in Help:</strong> Access help system from the application menu</li>
+                <li><strong>Community Support:</strong> Active user community for assistance</li>
+                <li><strong>Real-time Updates:</strong> Automatic updates with bug fixes and improvements</li>
+                <li><strong>Log Files:</strong> Check application logs for detailed error information</li>
+            </ul>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="doc-section">
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            
+            <h3>General Questions</h3>
+            
+            <h4>Is 4All-Downloader really free?</h4>
+            <p>Yes, 4All-Downloader is completely free with no ads, no hidden payments, and no credit card required. We also offer Pro and Enterprise plans with additional features and earlier access to new functionality.</p>
+
+            <h4>What websites are supported?</h4>
+            <p>4All-Downloader supports hundreds of websites through its various engines. If a site isn't supported by the built-in engines, you can add custom engines or use the web browser tab with JavaScript injection.</p>
+
+            <h4>Is it legal to download content?</h4>
+            <p>The legality of downloading content depends on the source, content type, and your local laws. Always respect copyright laws and terms of service. 4All-Downloader is a tool - users are responsible for how they use it.</p>
+
+            <h3>Technical Questions</h3>
+            
+            <h4>Can I download private or password-protected content?</h4>
+            <p>Yes, you can import browser cookies to access content you're authorized to view. The cookie import feature supports all major browsers.</p>
+
+            <h4>How do I update the download engines?</h4>
+            <p>Download engines are automatically updated through the application's update system. You can also manually update them in the settings if needed.</p>
+
+            <h4>Can I pause and resume downloads?</h4>
+            <p>Yes, most downloads can be paused and resumed. This depends on the download engine and the source server's support for range requests.</p>
+
+            <h3>Advanced Questions</h3>
+            
+            <h4>How do I add a custom download engine?</h4>
+            <p>Custom engines require creating a configuration file with format mappings and executable paths. Detailed instructions are available in the advanced configuration section.</p>
+
+            <h4>Can I automate downloads with scripts?</h4>
+            <p>Yes, you can use the command panel to execute scripts or use the application's API (if available in your version) for automation.</p>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" class="doc-section">
+            <h2><i class="fas fa-life-ring"></i> Support & Updates</h2>
+            
+            <h3>Getting Support</h3>
+            <ul class="feature-list">
+                <li><strong>Active Community:</strong> Join our user community for help and tips</li>
+                <li><strong>Real-time Support:</strong> Get assistance from active users and developers</li>
+                <li><strong>Documentation:</strong> Comprehensive documentation and guides</li>
+                <li><strong>Video Tutorials:</strong> Step-by-step video guides for common tasks</li>
+            </ul>
+
+            <h3>Updates & Maintenance</h3>
+            <ul class="feature-list">
+                <li><strong>Automatic Updates:</strong> Regular updates with new features and bug fixes</li>
+                <li><strong>Engine Updates:</strong> Download engines are automatically updated</li>
+                <li><strong>Security Patches:</strong> Prompt security updates when needed</li>
+                <li><strong>Feature Requests:</strong> Community-driven feature development</li>
+            </ul>
+
+            <h3>Reporting Issues</h3>
+            <ul class="feature-list">
+                <li><strong>Bug Reports:</strong> Report issues through the built-in reporting system</li>
+                <li><strong>Feature Requests:</strong> Suggest new features or improvements</li>
+                <li><strong>Log Files:</strong> Include log files with bug reports for faster resolution</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Pro Tip:</strong> Before reporting an issue, check if updating to the latest version resolves the problem. Many issues are fixed in regular updates.
+            </div>
+        </section>
+
+        <!-- Advanced Configuration -->
+        <section id="advanced-config" class="doc-section">
+            <h2><i class="fas fa-cogs"></i> Advanced Configuration</h2>
+            
+            <h3>Configuration Files</h3>
+            <p>4All-Downloader stores its configuration in JSON files that can be manually edited:</p>
+            
+            <div class="code-block">
+# Configuration file locations:
+Windows: ~/.yt-dlite/settings.json
+macOS: ~/.yt-dlite/settings.json
+Linux: ~/.yt-dlite/settings.json
+            </div>
+
+            <h3>Custom Engine Configuration</h3>
+            <p>Example configuration for a custom download engine:</p>
+            
+            <div class="code-block">
+{
+    "custom_engines": [
+        {
+            "name": "MyDownloader",
+            "executable": "/path/to/downloader",
+            "supported_sites": ["example.com", "test.org"],
+            "format_mapping": {
+                "video_best": "--quality=best --format=video",
+                "audio_best": "--quality=best --format=audio --extract-audio",
+                "video_720p": "--height=720 --format=mp4"
+            },
+            "progress_regex": "Progress: (\\d+(?:\\.\\d+)?)%",
+            "output_template": "%(title)s.%(ext)s"
+        }
+    ]
+}
+            </div>
+
+            <h3>Network Configuration</h3>
+            <div class="code-block">
+{
+    "network": {
+        "proxy": {
+            "type": "socks5",
+            "host": "127.0.0.1",
+            "port": 1080,
+            "username": "user",
+            "password": "pass"
+        },
+        "user_agent": "Mozilla/5.0 (Custom Agent)",
+        "max_connections": 4,
+        "timeout": 30,
+        "retries": 3
+    }
+}
+            </div>
+
+            <div class="warning-box">
+                <strong>Warning:</strong> Manual configuration file editing requires technical knowledge. Always backup configuration files before making changes.
+            </div>
+        </section>
+
+        <!-- Back to Top -->
+        <div style="text-align: center; margin: 3rem 0;">
+            <button class="btn btn-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <i class="fas fa-arrow-up"></i>
+                Back to Top
+            </button>
+        </div>
+    </main>
+
+    <!-- Inherited JavaScript -->
+    <script src="scriptt.js?v=1.0.3"></script>
+    
+    <!-- Documentation-specific JavaScript -->
+    <script>
+        // Sidebar toggle functionality
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const docSidebar = document.getElementById('docSidebar');
+        const docContent = document.getElementById('docContent');
+
+        sidebarToggle.addEventListener('click', () => {
+            docSidebar.classList.toggle('collapsed');
+            docContent.classList.toggle('expanded');
+            
+            const icon = sidebarToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active section highlighting
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('.doc-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    currentSection = section.id;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Update active section on scroll
+        window.addEventListener('scroll', updateActiveSection);
+        
+        // Initial active section update
+        updateActiveSection();
+
+        // Mobile responsiveness
+        function handleResize() {
+            if (window.innerWidth <= 768) {
+                docSidebar.classList.add('collapsed');
+                docContent.classList.add('expanded');
+            } else {
+                docSidebar.classList.remove('collapsed');
+                docContent.classList.remove('expanded');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial check
+    </script>
+</body>
+</html>
